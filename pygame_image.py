@@ -25,28 +25,32 @@ def main():
 
         key_list =pg.key.get_pressed()
 
-        
+        vx, vy = -1, 0  # 何も押さないときは左(-1)へ流れる
         if key_list[pg.K_UP]:
-            kk_rct.move_ip((0, -2))
-        elif key_list[pg.K_DOWN]:
-            kk_rct.move_ip((0, 2))
-        elif key_list[pg.K_LEFT]:
-            kk_rct.move_ip((-2, 0))
-        elif key_list[pg.K_RIGHT]:
-            kk_rct.move_ip((1, 0))  # ①のみだと背景と一緒に左へ流れる分が消えてその場に居座る
-        else:
-            kk_rct.move_ip((-1, 0))  # ① 何も押さないときは背景と同じ速度で左へ流れる
+            vy -= 1
+        if key_list[pg.K_DOWN]:
+            vy += 1
+        if key_list[pg.K_LEFT]:
+            vx -= 1
+        if key_list[pg.K_RIGHT]:
+            vx += 2  # -1 + 2 = +1 で右に進む
+
+        kk_rct.move_ip((vx, vy))  # move_ipはここ1回だけ
+
+        
+       # if key_list[pg.K_UP]:
+        #    kk_rct.move_ip((0, -2))
+        #elif key_list[pg.K_DOWN]:
+         #   kk_rct.move_ip((0, 2))
+        #elif key_list[pg.K_LEFT]:
+         #   kk_rct.move_ip((-2, 0))
+        #elif key_list[pg.K_RIGHT]:
+         #   kk_rct.move_ip((1, 0))  # ①のみだと背景と一緒に左へ流れる分が消えてその場に居座る
+        #else:
+         #   kk_rct.move_ip((-1, 0))  # ① 何も押さないときは背景と同じ速度で左へ流れる
 
        
-        #print(key_list)
-        #if key_list[pg.K_UP]:
-           # kk_rct.move_ip((0,-1))
-        #elif key_list[pg.K_DOWN]:
-            #kk_rct.move_ip((0,1))
-        #elif key_list[pg.K_LEFT]:
-          #  kk_rct.move_ip((-1,0))
-        #elif key_list[pg.K_RIGHT]:
-           # kk_rct.move_ip((1,0))
+       
         x = tmr%3200
         screen.blit(bg_img, [-x, 0])
         screen.blit(bg_img_ha, [-x+1600, 0])
