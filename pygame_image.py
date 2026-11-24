@@ -25,7 +25,7 @@ def main():
 
         key_list =pg.key.get_pressed()
 
-        key_list = pg.key.get_pressed()
+        
         if key_list[pg.K_UP]:
             kk_rct.move_ip((0, -2))
         elif key_list[pg.K_DOWN]:
